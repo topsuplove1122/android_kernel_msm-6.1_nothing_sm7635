@@ -10,8 +10,6 @@ load(
     "kernel_modules_install",
     "kernel_uapi_headers_cc_library",
     "merged_kernel_uapi_headers",
-    "super_image",
-    "unsparsed_image",
 )
 load(
     "//build:msm_kernel_extensions.bzl",
@@ -301,17 +299,7 @@ def _define_image_build(
         output_group = "vendor_dlkm.img",
     )
 
-    super_image(
-        name = "{}_super_image".format(target),
-        system_dlkm_image = ":{}_system_dlkm_image_file".format(target),
-        vendor_dlkm_image = ":{}_vendor_dlkm_image_file".format(target),
-    )
-
-    unsparsed_image(
-        name = "{}_unsparsed_image".format(target),
-        src = "{}_super_image".format(target),
-        out = "super_unsparsed.img",
-    )
+    
 
 def _define_kernel_dist(
         target,
